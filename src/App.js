@@ -1,26 +1,62 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import React, { Component } from 'react';
+
+class App extends Component {
+    state = {
+        query: '',
+        data: [],
+    }
+
+    handleInputChange = () => {
+        this.setState({
+            query: this.search.value
+        })
+        this.filterArray();
+    }
+
+    getData = () => {
+        fetch(`url`)
+        .then(response => response.json())
+        .then(responseData => {
+            // console.log(responseData)
+            this.setState({
+                data:responseData
+            })
+        })
+    }
+
+    filterArray = () => {
+        var searchString = this.state.query;
+        var responseData = this.state.data
+        if(searchString.length > 0){
+            // console.log(responseData[i].name);
+            responseData = responseData.filter(l => {
+                console.log( l.name.toLowerCase().match(searchString));
+            })
+        }
+    }
+
+    componentWillMount() {
+        this.getData();
+    }
+    render() {
+        return (
+            <div className="searchForm">
+                <form>
+                    <input type="text" id="filter" placeholder="Search for..." ref={input => this.search = input} onChange={this.handleInputChange}/>
+                </form>
+                <div>
+                    {
+                        this.state.data.map((i) =>
+                            <p>{i.name}</p>
+                        )
+                    }
+                </div>
+            </div>
+        )
+    }
 }
 
+
 export default App;
+
