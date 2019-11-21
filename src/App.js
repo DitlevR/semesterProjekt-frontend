@@ -1,6 +1,9 @@
 import "bootstrap/dist/css/bootstrap.css";
-import React, { Component } from "react";
+import React, { useEffect, Component } from "react";
+import { Table } from "react-bootstrap";
+import Header from "./Header";
 const url = "https://idon.dk/semesterprojekt/";
+
 class App extends Component {
   state = {
     query: "",
@@ -11,7 +14,16 @@ class App extends Component {
     this.setState({
       query: this.search.value
     });
-    this.filterArray();
+    let filteredBooks = this.state.data.filter(book => {
+      return (
+        book.title.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1
+      );
+    });
+    this.setState({
+      data: filteredBooks
+    });
+    console.log(this.state.query);
+    console.log(this.state.data);
   };
 
   getData = () => {
@@ -27,19 +39,21 @@ class App extends Component {
   };
 
   filterArray = () => {
-    var searchString = this.state.query;
-    var responseData = this.state.data;
-    if (searchString.length > 0) {
-      // console.log(responseData[i].name);
-      responseData = responseData.filter(l => {
-        console.log(l.name.toLowerCase().match(searchString));
-      });
-    }
+    let filteredBooks = this.state.data.filter(book => {
+      return (
+        book.title.toLowerCase().indexOf(this.state.query.toLowerCase()) !== -1
+      );
+    });
+
+    this.setState({
+      data: filteredBooks
+    });
   };
 
-  componentWillMount() {
+  componentDidMount() {
     this.getData();
   }
+
   render() {
     return (
       <div className="searchForm">
@@ -53,25 +67,28 @@ class App extends Component {
           />
         </form>
         <div>
-          <table>
+          <Table striped hover bordered>
             <thead>
-              <th>Titel</th>
-              <th>Beskrivelse</th>
-              <th>Antal sider</th>
-              <th>Forfatter</th>
+              <tr>
+                <th>Titel</th>
+                <th>Beskrivelse</th>
+                <th>Antal sider</th>
+                <th>Forfatter</th>
+              </tr>
             </thead>
-
-            {this.state.data.map((book, i) => {
-              return (
-                <div key={i}>
-                  <tr>{book.title}</tr>
-                  <tr>{book.description}</tr>
-                  <tr>{book.pageNumber}</tr>
-                  <tr>{book.author}</tr>
-                </div>
-              );
-            })}
-          </table>
+            <tbody>
+              {this.state.data.map((book, i) => {
+                return (
+                  <tr key={i}>
+                    <td>{book.title}</td>
+                    <td>{book.description}</td>
+                    <td>{book.pageNumber}</td>
+                    <td>{book.author}</td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
         </div>
       </div>
     );
