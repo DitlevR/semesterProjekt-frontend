@@ -1,6 +1,7 @@
 import "bootstrap/dist/css/bootstrap.css";
-import React, { useEffect, Component } from "react";
+import React, { Component } from "react";
 import Table from "./Table";
+
 import Header from "./Header";
 const url = "https://idon.dk/semesterprojekt/";
 

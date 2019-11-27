@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import MaterialTable from "material-table";
-import App from "./App";
 import PacmanLoader from "react-spinners/PacmanLoader";
 const url = "https://idon.dk/semesterprojekt/";
 
