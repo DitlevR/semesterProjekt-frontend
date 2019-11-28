@@ -1,6 +1,6 @@
 import "bootstrap/dist/css/bootstrap.css";
 import React, { Component } from "react";
-import Table from "./Table";
+import Table from "./AllBooks";
 
 import Header from "./Header";
 const url = "https://idon.dk/semesterprojekt/";
@@ -31,11 +31,9 @@ class App extends Component {
     fetch(url + "api/book/allbooks")
       .then(response => response.json())
       .then(responseData => {
-        console.log(responseData);
         this.setState({
           data: responseData
         });
-        console.log("state", this.state.data);
       });
   };
 
@@ -59,7 +57,6 @@ class App extends Component {
     return (
       <div>
         <Header />
-        <Table />
       </div>
     );
   }

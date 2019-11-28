@@ -35,19 +35,17 @@ export default class MaterialTableDemo extends Component {
     fetch(url + "api/book/allbooks")
       .then(response => response.json())
       .then(responseData => {
-        console.log(responseData);
         this.setState({
           data: responseData,
           loading: false
         });
-        console.log("state", this.state.data);
       });
   }
 
   render() {
     if (this.state.loading) {
       return (
-        <div className="sweet-loading">
+        <div className="container">
           <PacmanLoader
             size="80"
             color="#6b5ce7"
@@ -57,7 +55,7 @@ export default class MaterialTableDemo extends Component {
       );
     } else {
       return (
-        <div>
+        <div className="container">
           <MaterialTable
             title="Editable Example"
             columns={this.state.columns}
@@ -82,6 +80,7 @@ export default class MaterialTableDemo extends Component {
                       this.setState(prevState => {
                         const data = [...prevState.data];
                         data[data.indexOf(oldData)] = newData;
+
                         return { ...prevState, data };
                       });
                     }
@@ -100,7 +99,6 @@ export default class MaterialTableDemo extends Component {
                 })
             }}
           />
-          )
         </div>
       );
     }
