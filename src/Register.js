@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useState } from "react";
 import { Button } from "react-bootstrap";
 const url = "https://idon.dk/semesterprojekt/";
 
@@ -9,15 +9,8 @@ const Register = () => {
 
   const handleSubmit = evt => {
     evt.preventDefault();
-
-    fetch(url + "api/user/register")
-      .then(response => response.json())
-      .then(responseData => {
-        this.setState({
-          data: responseData
-        });
-      });
-
+    console.log(input);
+    registerUser(input);
     setInput(initialState);
   };
 
@@ -49,35 +42,19 @@ const Register = () => {
     return res.json();
   }
 
-  function registerUser(input) {
-    function makeOptions(method, body) {
-      var opts = {
-        method: method,
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        }
-      };
-      if (body) {
-        opts.body = JSON.stringify(body);
-      }
-      return opts;
-    }
-
-    return fetch(URL, makeOptions("POST", input)).then(handleHttpErrors);
+  function registerUser(thisGuy) {
+    return fetch(url + "/api/user/register", makeOptions("POST", thisGuy)).then(
+      handleHttpErrors
+    );
   }
 
   return (
+    //value={input.name}           value={input.password}
     <div style={{ marginTop: 25 }}>
       <form onSubmit={handleSubmit} onChange={handleInput}>
-        <input id="name" type="text" placeholder="Name" value={input.name} />
+        <input id="name" type="text" placeholder="Name" />
         <br />
-        <input
-          id="password"
-          type="text"
-          placeholder="Password"
-          value={input.password}
-        />
+        <input id="password" type="text" placeholder="Password" />
         <br />
         <button>Submit</button>
       </form>
