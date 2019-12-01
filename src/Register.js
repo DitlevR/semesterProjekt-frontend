@@ -1,9 +1,9 @@
 import React, { Component, useState } from "react";
-import { Button } from "react-bootstrap";
-const url = "https://idon.dk/semesterprojekt/";
+import { Button } from "react-bootstrap"; //https://idon.dk/semesterprojekt/
+const url = "https://idon.dk/semesterprojekt/"; //http://localhost:8080/semesterprojekt/
 
 const Register = () => {
-  const initialState = { name: "", password: "" };
+  const initialState = { userName: "", userPass: "" };
 
   const [input, setInput] = useState(initialState);
 
@@ -43,7 +43,7 @@ const Register = () => {
   }
 
   function registerUser(thisGuy) {
-    return fetch(url + "/api/user/register", makeOptions("POST", thisGuy)).then(
+    fetch(url + "api/user/register", makeOptions("POST", thisGuy)).then(
       handleHttpErrors
     );
   }
@@ -52,9 +52,9 @@ const Register = () => {
     //value={input.name}           value={input.password}
     <div style={{ marginTop: 25 }}>
       <form onSubmit={handleSubmit} onChange={handleInput}>
-        <input id="name" type="text" placeholder="Name" />
+        <input id="userName" type="text" placeholder="Name" />
         <br />
-        <input id="password" type="text" placeholder="Password" />
+        <input id="userPass" type="text" placeholder="Password" />
         <br />
         <button>Submit</button>
       </form>
