@@ -9,7 +9,7 @@ class Book extends Component {
   }
 
   getBook = () => {
-    fetch(url + "api/book/getbook/5")
+    fetch(url + "api/book/getbook/6")
       .then(response => response.json())
       .then(responsedata =>
         this.setState({ book: responsedata, loading: false })
@@ -28,6 +28,15 @@ class Book extends Component {
 
   render() {
     if (!this.state.loading) {
+      const isAvailable = this.state.book.status;
+      let status;
+      console.log(isAvailable);
+      if (isAvailable) {
+        status = <Button onClick={this.loanBook}>Lån denne Bog</Button>;
+      } else {
+        status = <p>Book is loaned</p>;
+      }
+      console.log({ status });
       return (
         <div className="container">
           <ul>
@@ -36,9 +45,8 @@ class Book extends Component {
             <li>{this.state.book.description}</li>
             <li>{this.state.book.pageNumber}</li>
             <li>{this.state.book.author}</li>
-            <li>{}</li>
+            <h1>{status}</h1>
           </ul>
-          <Button onClick={this.loanBook}>Lån denne Bog</Button>
         </div>
       );
     } else {
