@@ -49,12 +49,21 @@ const Register = () => {
   }
 
   return (
-    //value={input.name}           value={input.password}
     <div style={{ marginTop: 25 }}>
       <form onSubmit={handleSubmit} onChange={handleInput}>
-        <input id="userName" type="text" placeholder="Name" />
+        <input
+          id="userName"
+          type="text"
+          placeholder="Name"
+          value={input.userName}
+        />
         <br />
-        <input id="userPass" type="text" placeholder="Password" />
+        <input
+          id="userPass"
+          type="text"
+          placeholder="Password"
+          value={input.userPass}
+        />
         <br />
         <button>Submit</button>
       </form>
