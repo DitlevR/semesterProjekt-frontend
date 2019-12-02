@@ -11,6 +11,7 @@ class App extends Component {
     data: []
   };
 
+  //bruger vi denne ?
   handleInputChange = () => {
     this.setState({
       query: this.search.value
@@ -37,6 +38,7 @@ class App extends Component {
       });
   };
 
+  //bruger vi denne funktion ?
   filterArray = () => {
     let filteredBooks = this.state.data.filter(book => {
       return (
