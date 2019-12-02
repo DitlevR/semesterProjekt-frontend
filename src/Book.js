@@ -29,7 +29,7 @@ class Book extends Component {
   render() {
     if (!this.state.loading) {
       return (
-        <div>
+        <div className="container">
           <ul>
             <li>{this.state.book.id}</li>
             <li>{this.state.book.title}</li>

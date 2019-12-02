@@ -6,6 +6,7 @@ const url = "https://idon.dk/semesterprojekt/";
 export default class MaterialTableDemo extends Component {
   state = {
     columns: [
+      { title: "ID", field: "id", editable: "never" },
       { title: "Tile", field: "title", editable: "never" },
       { title: "description", field: "description", editable: "never" },
       {
