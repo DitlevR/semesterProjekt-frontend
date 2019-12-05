@@ -22,13 +22,13 @@ class Book extends Component {
     );
   };
 
-  handinbook = () {
+  handinbook = () => {
     fetch(url + "api/book/returnLoanBook", {
-      method: 'Post',
-      mode: 'cors',
-      body: JSON.stringify()    
-    })
-  }
+      method: "Post",
+      mode: "cors",
+      body: JSON.stringify()
+    });
+  };
 
   componentDidMount() {
     this.getBook();
@@ -42,7 +42,9 @@ class Book extends Component {
       if (isAvailable) {
         status = <Button onClick={this.loanBook}>Lån denne Bog</Button>;
       } else {
-        status = <Button onClick={this.handinbook}>Book is loaned, hand in</Button>;
+        status = (
+          <Button onClick={this.handinbook}>Book is loaned, hand in</Button>
+        );
       }
       console.log({ status });
       return (
